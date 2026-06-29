@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: microservices
+
+resources:
+  - ../../base
+  - ../../infrastructure/postgres
+  - ../../infrastructure/mongodb
+  - ../../infrastructure/redis
+  - ../../infrastructure/zookeeper
+  - ../../infrastructure/kafka
+  - ../../services/api-gateway
+  - ../../services/auth-service
+  - ../../services/chat-service
+  - ../../services/ai-service
+  - ../../services/analytics-service
+  - ../../services/notification-service
+  - ../../services/frontend
+
+patches:
+  # Scale down to 1 replica in dev
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment

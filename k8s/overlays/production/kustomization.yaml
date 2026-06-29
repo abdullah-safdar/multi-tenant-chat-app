@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: microservices
+
+resources:
+  - ../../base
+  - ../../infrastructure/postgres
+  - ../../infrastructure/mongodb
+  - ../../infrastructure/redis
+  - ../../infrastructure/zookeeper
+  - ../../infrastructure/kafka
+  - ../../services/api-gateway
+  - ../../services/auth-service
+  - ../../services/chat-service
+  - ../../services/ai-service
+  - ../../services/analytics-service
+  - ../../services/notification-service
+  - ../../services/frontend
+
+images:
+  - name: microservices/api-gateway
+    newTag: latest
+  - name: microservices/auth-service
+    newTag: latest
+  - name: microservices/chat-service
+    newTag: latest
+  - name: microservices/ai-service
+    newTag: latest
+  - name: microservices/analytics-service
+    newTag: latest
+  - name: microservices/notification-service
+    newTag: latest
+  - name: microservices/frontend
+    newTag: latest
